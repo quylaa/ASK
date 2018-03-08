@@ -1,0 +1,24 @@
+{
+  "name": "ask",
+  "version": "0.0.1",
+  "description": "Ask Stupid Kwestions",
+  "main": "index.js",
+  "scripts": {
+    "test": "pm2 start index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quylaa/ASK.git"
+  },
+  "author": "Aleks Christensen, Anna Zaitzeff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quylaa/ASK/issues"
+  },
+  "homepage": "https://github.com/quylaa/ASK#readme",
+  "dependencies": {
+    "pm2": "^2.10.1",
+    "vue": "^2.5.13",
+    "vuetify": "^1.0.5"
+  }
+}
