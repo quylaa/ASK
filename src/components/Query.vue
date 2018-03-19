@@ -1,8 +1,8 @@
 <template>
 <v-container d-flex>
-  <v-flex xs1 align-start>
+  <v-flex xs2 align-start>
     <v-card light color="accent">
-      <v-card-text class="text-xs-center">{{ score }}</v-card-text>
+      <v-card-text class="text-xs-center"><v-btn icon><v-icon color="white">keyboard_arrow_up</v-icon></v-btn>{{ score }}<v-btn icon><v-icon color="white">keyboard_arrow_down</v-icon></v-btn></v-card-text>
     </v-card>
   </v-flex>
   <v-flex xs10>
@@ -21,6 +21,11 @@
         </v-layout>
       </v-container>
     </v-card>
+  </v-flex>
+  <v-flex xs2 fill-height fluid>
+    <v-btn light color="accent">
+     <v-icon color="white">question_answer</v-icon>
+    </v-btn>
   </v-flex>
 </v-container>
 </template>
