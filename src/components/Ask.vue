@@ -24,7 +24,7 @@ export default {
     }
   },
   created () {
-    axios.get('http://192.168.80.14:8000/api/questions')
+    axios.get('http://192.168.80.14:8001/api/questions')
     .then(res => {
       this.questions = res.data
     })
