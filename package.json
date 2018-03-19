@@ -1,7 +1,7 @@
 {
-  "name": "webpack-test",
+  "name": "ASK",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Ask Stupid Kwestions",
   "author": "",
   "private": true,
   "scripts": {
