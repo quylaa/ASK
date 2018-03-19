@@ -2,50 +2,25 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-// import router from './router'
+import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-Vue.use(Vuetify)
-
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#212A3F',
+    secondary: '#64708A',
+    accent: '#A2EADE',
+    error: '#49B863',
+    info: '#137E1D'
+  }
+})
 Vue.config.productionTip = false
-
-Vue.component('query', {
-  props: ['asker', 'question', 'id'],
-  template: `
-  <v-flex xs10>
-    <v-card dark color="purple">
-      <v-container fill-height fluid>
-        <v-layout fill-height>
-          <v-flex xs10 align-start flexbox>
-            <span class="question-text">{{ question }}</span>
-          </v-flex>
-          <v-flex xs1 align-end flexbox>
-            <span class="asker-text">{{ asker }}</span>
-          </v-flex>
-          <v-flex xs1 align-end flexbox>
-            <span>{{ id }}</span>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
-  </v-flex>`
-})
-
-Vue.component('score', {
-  props: ['id'],
-  template: `
-  <v-flex xs1 align-end>
-    <v-card dark color="blue">
-      <v-card-text>{{ id }}</v-card-text>
-    </v-card>
-  </v-flex>`
-})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // router,
+  router,
   components: { App },
   template: '<App/>'
 })
