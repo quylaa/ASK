@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs10>
+  <v-flex xs8 offset-xs2>
     <v-card dark color="error">
       <v-container fill-height fluid>
         <v-layout fill-height>

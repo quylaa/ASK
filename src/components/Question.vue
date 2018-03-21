@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-xl fluid>
     <v-layout row>
-      <v-flex xs8 offset-xs2>
-        <v-card light color="secondary"
-          <v-container fill-height fluid>
+      <v-flex xs10 offset-xs1>
+        <v-card dark color="secondary">
+          <v-container d-flex fill-height fluid>
             <v-layout fill-height>
               <v-flex xs10 align-start flexbox>
                 <span class="question-text">{{ qna.que.question }}</span>
@@ -15,6 +15,8 @@
           </v-container>
         </v-card>
       </v-flex>
+    </v-layout>
+    <v-layout row wrap>
       <answer v-for="a in qna.ans" :key="a.id" :answer="a"></answer>
     </v-layout>
   </v-container>
