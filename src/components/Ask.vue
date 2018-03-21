@@ -1,9 +1,7 @@
 <template>
   <v-container grid-list-xl fill-height fluid>
     <v-layout row wrap>
-      <query v-for="q in questions"
-      :key="q.id"
-      :asker="q.asker" :question="q.question" :id="q.id" :score="q.score"></query>
+      <query v-for="q in questions" :key="q.id" :query="q"></query>
     </v-layout>
   </v-container>
 </template>

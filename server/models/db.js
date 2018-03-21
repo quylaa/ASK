@@ -9,9 +9,9 @@ class Database {
       database: 'ask'
     })
   }
-  query(sql) {
+  query(sql, args) {
     return new Promise((resolve, reject) => {
-      this.conn.query(sql, (err, results) => {
+      this.conn.query(sql, args, (err, results) => {
         if (err) reject(err)
         resolve(results)
       })
