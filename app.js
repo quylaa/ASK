@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride())
 app.use(cookieParser())
-app.set('port', process.env.PORT || 8000)
+app.set('port', process.env.PORT || 8001)
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 })
 
 app.use(express.static(__dirname + '/dist'))
+app.use(express.static(__dirname + '/static'))
 
 router.get('/questions', questions.index)
 //router.get('/answers', answers.index)
