@@ -6,16 +6,16 @@
           <v-container fill-height fluid>
             <v-layout fill-height>
               <v-flex xs10 align-start flexbox>
-                <span class="question-text">{{ question }}</span>
+                <span class="question-text">{{ qna.que.question }}</span>
               </v-flex>
               <v-flex xs1 align-end flexbox>
-                <span class="asker-text">{{ asker }}</span>
+                <span class="asker-text">{{ qna.que.asker }}</span>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card>
       </v-flex>
-      <answer v-for="a in answers" :key="a.id" :answer="a"></answer>
+      <answer v-for="a in qna.ans" :key="a.id" :answer="a"></answer>
     </v-layout>
   </v-container>
 </template>
@@ -30,18 +30,18 @@ export default {
   },
   data () {
     return {
-      answers: [],
+      qna: {que: {question: '', asker: ''}, ans: []},
       errors: []
     }
   },
   props: {
-    id: {type: Number, required: true}
+    id: {type: [String, Number], required: true}
   },
   created () {
-    const endpoint = 'http://192.168.80.14:8001/api/answers/' + this.$route.params.id
+    const endpoint = 'http://192.168.80.14:8000/api/answers/' + this.$route.params.id
     axios.get(endpoint)
     .then(res => {
-      this.answers = res.data
+      this.qna = res.data
     })
     .catch(e => {
       this.errors.push(e)

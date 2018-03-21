@@ -21,7 +21,8 @@ export default new Router({
     {
       path: '/question/:id',
       name: 'Question',
-      component: Question
+      components: {default: Question},
+      props: {default: true}
     }
   ]
 })

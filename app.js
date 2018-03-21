@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + '/dist'))
 
 router.get('/questions', questions.index)
+router.get('/questions/:id', questions.one)
 router.get('/answers', answers.index)
 router.get('/answers/:id', answers.individual)
 //router.get('/users', users.index)

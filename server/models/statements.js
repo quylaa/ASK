@@ -4,7 +4,11 @@ module.exports = {
 
   allAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp, Answer.color FROM Answer JOIN Users WHERE Answer.userid = Users.userid',
 
-  someAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp, Answer.color FROM Answer JOIN Users ON Answer.userid = Users.userid WHERE Answer.questionid = ?',
+  // someAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp, Answer.color FROM Answer JOIN Users ON Answer.userid = Users.userid WHERE Answer.questionid = ?',
+
+  anQuestion: 'CALL getQuestion(?)',
+
+  someAnswers: 'CALL getAnswers(?)',
 
   allUsers: 'SELECT * FROM Users'
 
