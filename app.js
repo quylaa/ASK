@@ -13,11 +13,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride())
 app.use(cookieParser())
-<<<<<<< HEAD
-app.set('port', process.env.PORT || 8001)
-=======
 app.set('port', process.env.APIPORT || 8000)
->>>>>>> bceb3ef0a5f33bef90cb4a7c68a7be962a271b9b
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
