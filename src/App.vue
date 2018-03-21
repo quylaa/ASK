@@ -4,13 +4,13 @@
     <img src="../static/Interrobang1.png" alt="interrobang" height="50px">
     <v-toolbar-title>ASK</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon to="/search">
-      <v-icon>search</v-icon>
-    </v-btn>
     <v-btn icon to="/">
       <v-icon>question_answer</v-icon>
     </v-btn>
-    <v-btn icon to="user">
+    <v-btn icon to="/search">
+      <v-icon>search</v-icon>
+    </v-btn>
+    <v-btn icon to="/user">
       <v-icon>account_box</v-icon>
     </v-btn>
   </v-toolbar>

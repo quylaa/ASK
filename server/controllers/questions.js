@@ -8,15 +8,12 @@ module.exports = {
     .then(data => {
       sendResult(res, data)
     })
-      /*let quest = []
-      data.forEach(row => {
-        quest.push({'asker': row.asker, 'question': row.question, 'id': row.id})
-      })
-      return quest
+  },
+  one (req, res) {
+    Questions.getOne(req.params.id)
+    .then(data => {
+      sendResult(res, data[0][0]) // since there's only one result, return only that
     })
-    .then(quest => {
-      sendResult(res, quest)
-    })*/
   }
 }
 

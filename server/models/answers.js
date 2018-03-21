@@ -3,10 +3,10 @@ const Database = require('./db'),
   statements = require('./statements')
 
 module.exports = {
-  getAll: function() {
+  getAll: () => {
     return db.query(statements.allAnswers)
   },
-  getFor: function(id) {
+  getFor: id => {
     return db.query(statements.someAnswers, [id])
   }
 }
