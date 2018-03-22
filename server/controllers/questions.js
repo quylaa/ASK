@@ -6,7 +6,7 @@ module.exports = {
   index (req, res) {
     Questions.getAll()
     .then(data => {
-      sendResult(res, data)
+      sendResult(res, data.sort((a,b) => {return b.score - a.score}))
     })
   },
   one (req, res) {
