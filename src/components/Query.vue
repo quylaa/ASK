@@ -1,7 +1,7 @@
 <template>
 <v-container d-flex>
   <v-flex xs2 align-start>
-    <v-card light color="accent">
+    <v-card dark color="error">
       <v-card-text class="text-xs-center score"><v-btn icon><v-icon color="white">keyboard_arrow_up</v-icon></v-btn>{{ query.score }}<v-btn icon><v-icon color="white">keyboard_arrow_down</v-icon></v-btn></v-card-text>
     </v-card>
   </v-flex>
@@ -24,7 +24,7 @@
   </router-link></v-flex>
   <v-flex xs2 fill-height fluid>
     <v-btn light color="accent">
-     <v-icon color="white">question_answer</v-icon>
+     <v-icon color="white">comment</v-icon>
     </v-btn>
   </v-flex>
 </v-container>
