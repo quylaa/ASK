@@ -19,6 +19,18 @@ module.exports = {
         sendResult(res, data)
       })
     })
+  },
+  add (req, res) {
+    Answers.addOne(req.body.questionid, req.body.userid, req.body.content)
+    .then(data => {
+      sendResult(res, data)
+    })
+  },
+  del (req, res) {
+    Answers.delOne(req.params.id)
+    .then(data => {
+      sendResult(res, data)
+    })
   }
 }
 

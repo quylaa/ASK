@@ -14,6 +14,18 @@ module.exports = {
     .then(data => {
       sendResult(res, data[0][0]) // since there's only one result, return only that
     })
+  },
+  add (req, res) {
+    Questions.addOne(req.body.userid, req.body.content)
+    .then(data => {
+      sendResult(res, data)
+    })
+  },
+  del (req, res) {
+    Questions.removeOne(req.params.id)
+    .then(data => {
+      sendResult(res, data)
+    })
   }
 }
 

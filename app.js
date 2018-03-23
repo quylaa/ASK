@@ -26,8 +26,12 @@ app.use(express.static(__dirname + '/static'))
 
 router.get('/questions', questions.index)
 router.get('/questions/:id', questions.one)
+router.post('/questions/add', questions.add)
+router.get('/questions/del/:id', questions.del)
 router.get('/answers', answers.index)
 router.get('/answers/:id', answers.individual)
+router.post('/answers/add', answers.add)
+router.get('/answers/del/:id', answers.del)
 //router.get('/users', users.index)
 
 app.use('/api', router)
