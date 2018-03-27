@@ -10,7 +10,6 @@
       <v-container fill-height fluid>
         <v-layout fill-height>
           <v-flex xs10 align-start flexbox>
-          <v-icon>help_outline</v-icon>
             <span class="question-text">{{ query.question }}</span>
           </v-flex>
           <v-flex xs1 align-end flexbox>
@@ -24,9 +23,11 @@
     </v-card>
   </router-link></v-flex>
   <v-flex xs2 fill-height fluid>
-    <v-btn light color="accent">
-     <v-icon color="white">comment</v-icon>
-    </v-btn>
+    <v-card dark color="accent" class="text-xs-center comment">
+      <v-btn icon>
+       <v-icon medium>comment</v-icon>
+      </v-btn>
+    </v-card>
   </v-flex>
 </v-container>
 </template>
@@ -35,6 +36,10 @@
 .score {
   padding: 2px;
   width: 105%;
+}
+.comment {
+  padding: 2px;
+  width:105%;
 }
 a {
   text-decoration: none;
