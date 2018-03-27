@@ -2,27 +2,27 @@ module.exports = {
 
   allQuestions: 'SELECT Users.username AS asker, content AS question, questionid AS id, score, timestamp, Question.color from Question JOIN Users WHERE Question.userid = Users.userid',
 
-  allAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp, Answer.color FROM `Answer` JOIN `Users` WHERE Answer.userid = Users.userid',
+  allAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp, Answer.color FROM Answer JOIN Users WHERE Answer.userid = Users.userid',
 
   anQuestion: 'CALL getQuestion(?)',
 
-  addQuestion: 'INSERT INTO `Question` (userid, content) VALUES (?, ?)',
+  addQuestion: 'INSERT INTO Question (userid, content) VALUES (?, ?)',
 
   removeQuestion: 'CALL deleteQuestion(?)',
 
   someAnswers: 'CALL getAnswers(?)',
 
-  addAnswer: 'INSERT INTO `Answer` (questionid, userid, content) VALUES (?, ?, ?)',
+  addAnswer: 'INSERT INTO Answer (questionid, userid, content) VALUES (?, ?, ?)',
 
-  removeAnswer: 'DELETE FROM `Answer` WHERE answerid = ?',
+  removeAnswer: 'DELETE FROM Answer WHERE answerid = ?',
 
-  allUsers: 'SELECT * FROM `Users`',
+  allUsers: 'SELECT * FROM Users',
 
-  checkLogin: 'SELECT COUNT(1) FROM `Users` WHERE `username` = ? and `password` = MD5(?)',
+  checkLogin: 'SELECT userid FROM Users WHERE username = ? and password = MD5(?)',
 
-  anUser: 'SELECT userid, name, username, email FROM `Users` WHERE `username` = ?',
+  anUser: 'SELECT userid, name, username, email FROM Users WHERE userid = ?',
 
-  addUser: 'INSERT INTO `Users` (name, username, password, email) VALUES (?, ?, MD5(?), ?)'
+  addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)'
 
 }
 

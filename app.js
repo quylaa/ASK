@@ -5,9 +5,11 @@ const express = require('express'),
   methodOverride = require('method-override'),
   router = express.Router(),
   path = require('path'),
+  jwt = require('jsonwebtoken'),
+  bcrypt = require('bcryptjs'),
   questions = require('./server/controllers/questions')
   answers = require('./server/controllers/answers'),
-  //users = require('./server/controllers/users')
+  users = require('./server/controllers/users')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -17,7 +19,8 @@ app.set('port', process.env.APIPORT || 8000)
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
 
@@ -32,7 +35,10 @@ router.get('/answers', answers.index)
 router.get('/answers/:id', answers.individual)
 router.post('/answers/add', answers.add)
 router.get('/answers/del/:id', answers.del)
-//router.get('/users', users.index)
+router.get('/users', users.index)
+router.get('/users/:id', users.one)
+router.post('/users/add', users.add)
+router.post('/users/login', users.check)
 
 app.use('/api', router)
 

@@ -18,13 +18,21 @@ module.exports = {
   add (req, res) {
     Questions.addOne(req.body.userid, req.body.content)
     .then(data => {
-      sendResult(res, data)
+      if (data.affectedRows > 0) {
+        sendResult(res, {"success": true})
+      } else {
+        sendResult(res, {"success": false})
+      }
     })
   },
   del (req, res) {
     Questions.removeOne(req.params.id)
     .then(data => {
-      sendResult(res, data)
+      if (data.affectedRows > 0) {
+        sendResult(res, {"success": true})
+      } else {
+        sendResult(res, {"success": false})
+      }
     })
   }
 }
