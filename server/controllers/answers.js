@@ -19,6 +19,26 @@ module.exports = {
         sendResult(res, data)
       })
     })
+  },
+  add (req, res) {
+    Answers.addOne(req.body.questionid, req.body.userid, req.body.content)
+    .then(data => {
+      if (data.affectedRows > 0) {
+        sendResult(res, {"success": true})
+      } else {
+        sendResult(res, {"success": false})
+      }
+    })
+  },
+  del (req, res) {
+    Answers.delOne(req.params.id)
+    .then(data => {
+      if (data.affectedRows > 0) {
+        sendResult(res, {"success": true})
+      } else {
+        sendResult(res, {"success": false})
+      }
+    })
   }
 }
 

@@ -4,6 +4,7 @@ import Ask from '@/components/Ask'
 import Search from '@/components/Search'
 import User from '@/components/User'
 import Question from '@/components/Question'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       name: 'Question',
       components: {default: Question},
       props: {default: true}
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })

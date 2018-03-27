@@ -6,9 +6,23 @@ module.exports = {
 
   anQuestion: 'CALL getQuestion(?)',
 
+  addQuestion: 'INSERT INTO Question (userid, content) VALUES (?, ?)',
+
+  removeQuestion: 'CALL deleteQuestion(?)',
+
   someAnswers: 'CALL getAnswers(?)',
 
-  allUsers: 'SELECT * FROM Users'
+  addAnswer: 'INSERT INTO Answer (questionid, userid, content) VALUES (?, ?, ?)',
+
+  removeAnswer: 'DELETE FROM Answer WHERE answerid = ?',
+
+  allUsers: 'SELECT * FROM Users',
+
+  checkLogin: 'SELECT userid FROM Users WHERE username = ? and password = MD5(?)',
+
+  anUser: 'SELECT userid, name, username, email FROM Users WHERE userid = ?',
+
+  addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)'
 
 }
 
@@ -28,6 +42,15 @@ DELIMITER $$
 CREATE PROCEDURE getAnswers(IN _questionid INT)
 BEGIN
 SELECT Users.username AS author, Answer.content AS answer, answerid AS id, Answer.questionid, Answer.score AS answerScore, timestamp FROM Answer JOIN Users ON Answer.userid = Users.userid WHERE Answer.questionid = _questionid;
+END$$
+ * 
+ * deleteQuestion(questionid) - remove all answers for a question, and then the question itself
+ *
+DELIMITER $$
+CREATE PROCEDURE deleteQuestion(IN _questionid INT)
+BEGIN
+DELETE FROM Answers WHERE questionid = _questionid;
+DELETE FROM Question WHERE questionid = _questionid;
 END$$
  * 
  */
