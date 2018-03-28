@@ -22,7 +22,17 @@ module.exports = {
 
   anUser: 'SELECT userid, name, username, email FROM Users WHERE userid = ?',
 
-  addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)'
+  addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)',
+
+  getVotes: 'SELECT JSON_QUERY(votes, "$") AS v FROM Users WHERE userid = ?',
+
+  setQuestionVotes: 'UPDATE Users SET votes = JSON_SET(votes, "$.questions", JSON_ARRAY(?)) WHERE userid = ?',
+
+  getQuestionVotes: 'SELECT JSON_QUERY(votes, "$.questions") AS questionVotes FROM Users WHERE userid = ?',
+
+  setAnswerVotes: 'UPDATE Users SET votes = JSON_SET(votes, "$.answers", JSON_ARRAY(?)) WHERE userid = ?',
+
+  getAnswerVotes: 'SELECT JSON_QUERY(votes, "$.answers") AS answerVotes FROM Users WHERE userid = ?',
 
 }
 
