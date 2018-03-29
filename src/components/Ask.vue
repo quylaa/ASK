@@ -18,6 +18,7 @@ export default {
   data () {
     return {
       questions: [],
+      votes: [],
       errors: []
     }
   },
@@ -25,6 +26,13 @@ export default {
     axios.get('http://192.168.80.14:8000/api/questions')
     .then(res => {
       this.questions = res.data
+      if (this.$session.exists()) {
+        let user = this.$session.get('userdata')
+        axios.get('http://192.168.80.14:8000/api/users/' + user.userid + '/votes/q')
+        .then(results => {
+          this.votes = results.data
+        })
+      }
     })
     .catch(e => {
       this.errors.push(e)

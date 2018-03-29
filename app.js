@@ -31,14 +31,22 @@ router.get('/questions', questions.index)
 router.get('/questions/:id', questions.one)
 router.post('/questions/add', questions.add)
 router.get('/questions/del/:id', questions.del)
+
 router.get('/answers', answers.index)
 router.get('/answers/:id', answers.individual)
 router.post('/answers/add', answers.add)
 router.get('/answers/del/:id', answers.del)
+
 router.get('/users', users.index)
 router.get('/users/:id', users.one)
 router.post('/users/add', users.add)
 router.post('/users/login', users.check)
+router.get('/users/:id/votes', users.getVotes)
+router.get('/users/:id/votes/q', users.getQVotes)
+router.get('/users/:id/votes/a', users.getAVotes)
+router.put('/users/:id/votes/q', users.setQVotes)
+router.put('/users/:id/votes/a', users.setAVotes)
+
 
 app.use('/api', router)
 
