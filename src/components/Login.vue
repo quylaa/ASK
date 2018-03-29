@@ -1,11 +1,13 @@
 <template>
-  <v-container grid-list-xl fill-height fluid>
+  <v-container grid-list text-xs-center>
     <v-layout row wrap>
-    <v-form v-model="valid">
-      <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
-      <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
-      <v-btn @click="login" :disabled="!valid">submit</v-btn>
-    </v-form>
+      <v-flex xs6>
+        <v-form v-model="valid">
+          <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
+          <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
+          <v-btn @submit="login" :disabled="!valid">submit</v-btn>
+        </v-form>
+     </v-flex>
     </v-layout>
   </v-container>
 </template>
