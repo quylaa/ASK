@@ -22,7 +22,7 @@ module.exports = {
         var token = jwt.sign({id: data.userid}, conf.secret, {expiresIn: 86400})
         Users.getOne(data[0].userid)
         .then(user => {
-          sendResult(res, {success: true, token: token, data: user[0]})
+          sendResult(res, {success: true, token: token, data: user.userdata})
         })
       } else {
         sendResult(res, {success: false})
