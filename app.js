@@ -47,7 +47,6 @@ router.get('/users/:id/votes/a', users.getAVotes)
 router.put('/users/:id/votes/q', users.setQVotes)
 router.put('/users/:id/votes/a', users.setAVotes)
 
-
 app.use('/api', router)
 
 app.listen(app.get('port'), () => {
