@@ -5,7 +5,7 @@
         <v-form v-model="valid">
           <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
           <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
-          <v-btn @click="login" :disabled="!valid">submit</v-btn>
+          <v-btn @submit="login" :disabled="!valid">submit</v-btn>
         </v-form>
      </v-flex>
     </v-layout>
