@@ -7,7 +7,18 @@ module.exports = {
     return db.query(statements.allUsers)
   },
   getOne: id => {
+    let data = {}
     return db.query(statements.anUser, [id])
+    .then(rows => {
+      data.userdata = rows[0]
+      return db.query(statements.userQuestions, [id])
+    }).then(rows => {
+      data.questions = rows
+      return db.query(statements.userAnswers, [id])
+    }).then(rows => {
+      data.answers = rows
+      return data
+    })
   },
   check: (user, passwd) => {
     return db.query(statements.checkLogin, [user, passwd])
