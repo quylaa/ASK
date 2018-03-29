@@ -1,11 +1,11 @@
 <template>
   <v-container grid-list text-xs-center>
-    <v-layout row wrap>
-      <v-flex xs6>
-        <v-form v-model="valid">
+    <v-layout row child-flex justify-center align-center wrap>
+      <v-flex xs4>
+        <v-form v-model="valid" @submit="login">
           <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
           <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
-          <v-btn @submit="login" :disabled="!valid">submit</v-btn>
+          <v-btn type="submit" :disabled="!valid">submit</v-btn>
         </v-form>
      </v-flex>
     </v-layout>

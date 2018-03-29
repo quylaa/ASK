@@ -13,6 +13,9 @@
     <v-btn icon v-if="this.$session.exists()" to="/user">
       <v-icon>account_box</v-icon>
     </v-btn>
+    <v-btn icon v-if="this.$session.exists()" to="/logout">
+        <v-icon>exit_to_app</v-icon>
+    </v-btn>
     <v-btn icon v-else to="/login">
       <v-icon>person</v-icon>
     </v-btn>
