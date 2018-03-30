@@ -20,21 +20,26 @@
       :id="'tab-' + i"
     >
       <v-card flat>
-        <v-card-text>{{ text }}</v-card-text>
+        <v-card-text>{{ name }}</v-card-text>
       </v-card>
     </v-tab-item>
   </v-tabs>
+  <p>{{ name }}</p>
 </v-container>
 </template>
 
 <script>
 export default {
   name: 'user',
-  props: {
-    id: {type: Number, required: true},
-    asker: {type: String, required: true},
-    question: {type: String, required: true},
-    score: {type: Number, required: true}
+  data () {
+    return {
+      name: ''
+    }
+  },
+  created () {
+    let userdata = this.$session.get('userdata')
+    this.name = userdata.name
   }
+
 }
 </script>
