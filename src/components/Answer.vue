@@ -1,10 +1,6 @@
 <template>
 <v-container justify-center d-flex>
-  <v-flex xs2 align-start>
-    <v-card dark color="error" class="score">
-      <v-card-text class="text-xs-center"><v-btn icon><v-icon color="white">keyboard_arrow_up</v-icon></v-btn>{{ answer.answerScore }}<v-btn icon><v-icon color="white">keyboard_arrow_down</v-icon></v-btn></v-card-text>
-    </v-card>
-  </v-flex>
+  <score :score="answer.answerScore" :id="answer.id" :answer="true"></score>
   <v-flex xs8 align-end>
     <v-card dark color="error">
       <v-container fill-height fluid>
@@ -32,8 +28,12 @@
 </style>
 
 <script>
+import score from '@/components/Score.vue'
 export default {
   name: 'Answer',
+  components: {
+    score: score
+  },
   props: {
     answer: {type: Object, required: true}
   }

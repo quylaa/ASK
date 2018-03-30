@@ -1,5 +1,7 @@
 let Users = require('../models/users'),
-  conf = require('../../config/index').app,
+  Questions = require('../models/questions'),
+  Answers = require('../models/answers'),
+  conf = require('../auth/config').app,
   jwt = require('jsonwebtoken')
 
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
     Users.check(req.body.username, req.body.password)
     .then(data => {
       if (data[0].userid) {
-        var token = jwt.sign({id: data.userid}, conf.secret, {expiresIn: 86400})
+        var token = jwt.sign({id: data[0].userid}, conf.secret, {expiresIn: 86400})
         Users.getOne(data[0].userid)
         .then(user => {
           sendResult(res, {success: true, token: token, data: user.userdata})
@@ -42,68 +44,103 @@ module.exports = {
   getVotes (req, res) {
     Users.getVotes(req.params.id)
     .then(data => {
-      sendResult(res, JSON.parse(data[0].v))
+      sendResult(res, JSON.parse(data[0].votes))
     })
   },
   getQVotes (req, res) {
-    Users.getQuestionVotes(req.params.id)
+    Users.getVotes(req.params.id)
     .then(data => {
-      sendResult(res, JSON.parse(data[0].questionVotes))
+      sendResult(res, JSON.parse(data[0].votes).questions)
+    })
+  },
+  getQVoteOne (req, res) {
+    Users.getVotes(req.params.id)
+    .then(data => {
+      return JSON.parse(data[0].votes).questions.find((el) => {return el.id === Number(req.params.qid)})
+    })
+    .then(data => {
+      sendResult(res, data)
     })
   },
   getAVotes (req, res) {
-    Users.getAnswerVotes(req.params.id)
+    Users.getVotes(req.params.id)
     .then(data => {
-      sendResult(res, JSON.parse(data[0].answerVotes))
+      sendResult(res, JSON.parse(data[0].votes).answers)
+    })
+  },
+  getAVoteOne (req, res) {
+    Users.getVotes(req.params.id)
+    .then(data => {
+      return JSON.parse(data[0].votes).answers.find((el) => {return el.id === Number(req.params.aid)})
+    })
+    .then(data => {
+      sendResult(res, data)
     })
   },
   setQVotes (req, res) {
-    Users.getQuestionVotes(req.params.id)
+    Users.getVotes(req.params.id)
     .then(data => {
-      data = JSON.parse(data[0].questionVotes)
-      let qv = data.find((o, i) => {
-        if (o.id == req.body.questionid) {
-          data[i] = {id: parseInt(req.body.questionid), vote: req.body.vote}
+      data = JSON.parse(data[0].votes)
+      let qv = data.questions.find((o, i) => {
+        if (o.id == req.body.id) {
+          if (req.body.reset) data.questions.splice(i, 1)
+          else {
+            data.questions[i] = {id: parseInt(req.body.id), vote: req.body.vote}
+            Questions.modScore(req.body.vote, req.body.id)
+          }
           return true
         }
       })
       if (!qv) {
-        data.push({id: parseInt(req.body.questionid), vote: req.body.vote})
+        data.questions.push({id: parseInt(req.body.id), vote: req.body.vote})
       }
       return data
     })
     .then(data => {
-      console.log(JSON.stringify(data))
-      Users.setQuestionVotes(req.params.id, JSON.stringify(data))
-      .then(result => {
-        sendResult(res, {"success": true})
-      })
+      return Users.setVotes(req.params.id, JSON.stringify(data))
+    })
+    .then(() => {
+      return Questions.modScore(req.body.vote, req.body.id)
+    })
+    .then(() => {
+      return Questions.solo(req.body.id)
+    })
+    .then(data => {
+      sendResult(res, {score: data[0].score})
     })
   },
   setAVotes (req, res) {
-    Users.getAnswerVotes(req.params.id)
+    Users.getVotes(req.params.id)
     .then(data => {
-      data = JSON.parse(data[0].answerVotes)
-      let av = data.find((o, i) => {
-        if (o.id == req.body.answerid) {
-          data[i] = {id: parseInt(req.body.answerid), vote: req.body.vote}
+      data = JSON.parse(data[0].votes)
+      let av = data.answers.find((o, i) => {
+        if (o.id == req.body.id) {
+          if (req.body.reset) data.answers.splice(i, 1)
+          else {
+            data.answers[i] = {id: parseInt(req.body.id), vote: req.body.vote}
+            Answers.modScore(req.body.vote, req.body.id)
+          }
           return true
         }
       })
       if (!av) {
-        data.push({id: parseInt(req.body.answerid), vote: req.body.vote})
+        data.answers.push({id: parseInt(req.body.id), vote: req.body.vote})
       }
       return data
     })
     .then(data => {
-      console.log(JSON.stringify(data))
-      Users.setAnswerVotes(req.params.id, JSON.stringify(data))
-      .then(result => {
-        sendResult(res, {"success": true})
-      })
+      Users.setVotes(req.params.id, JSON.stringify(data))
     })
-  },
-
+    .then(() => {
+      Answers.modScore(req.body.vote, req.body.id)
+    })
+    .then(() => {
+      return Answers.solo(req.body.id)
+    })
+    .then(data => {
+      sendResult(res, {score: data[0].score})
+    })
+  }
 }
 
 function sendResult(res, result) {

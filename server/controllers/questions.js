@@ -26,12 +26,19 @@ module.exports = {
     })
   },
   del (req, res) {
-    Questions.removeOne(req.params.id)
+    Questions.solo(req.params.id)
     .then(data => {
-      if (data.affectedRows > 0) {
-        sendResult(res, {"success": true})
+      if (data[0].userid === req.userID) {
+        Questions.removeOne(req.params.id)
+        .then(data => {
+          if (data.affectedRows > 0) {
+            sendResult(res, {success: true})
+          } else {
+            sendResult(res, {success: false})
+          }
+        })
       } else {
-        sendResult(res, {"success": false})
+        sendResult(res, {auth: false})
       }
     })
   }

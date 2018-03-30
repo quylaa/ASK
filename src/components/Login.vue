@@ -48,7 +48,7 @@ export default {
           this.$session.start()
           this.$session.set('jwt', response.data.token)
           this.$session.set('userdata', response.data.data)
-          // axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
           this.$router.push('/')
         }
       }, err => {

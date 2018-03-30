@@ -1,10 +1,6 @@
 <template>
 <v-container d-flex>
-  <v-flex xs2 align-start>
-    <v-card dark color="error">
-      <v-card-text class="text-xs-center score"><v-btn icon><v-icon color="white">keyboard_arrow_up</v-icon></v-btn>{{ query.score }}<v-btn icon><v-icon color="white">keyboard_arrow_down</v-icon></v-btn></v-card-text>
-    </v-card>
-  </v-flex>
+  <score :score="query.score" :id="query.id" :question="true"></score>
   <v-flex xs10><router-link :to="{name: 'Question', params: {id: query.id}}">
     <v-card dark color="secondary" class="card-content">
       <v-container fill-height fluid>
@@ -55,8 +51,12 @@ a {
 </style>
 
 <script>
+import score from '@/components/Score.vue'
 export default {
   name: 'query',
+  components: {
+    score: score
+  },
   props: {
     query: {type: Object, required: true}
   }

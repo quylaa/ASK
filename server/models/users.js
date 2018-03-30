@@ -29,16 +29,7 @@ module.exports = {
   getVotes: id => {
     return db.query(statements.getVotes, [id])
   },
-  setQuestionVotes: (id, arr) => {
-    return db.query(statements.setQuestionVotes, [arr, id])
-  },
-  setAnswerVotes: (id, arr) => {
-    return db.query(statements.setAnswerVotes, [arr, id])
-  },
-  getQuestionVotes: id => {
-    return db.query(statements.getQuestionVotes, [id])
-  },
-  getAnswerVotes: id => {
-    return db.query(statements.getAnswerVotes, [id])
+  setVotes: (id, arr) => {
+    return db.query(statements.setVotes, [arr, id])
   }
 }

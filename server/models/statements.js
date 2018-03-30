@@ -6,11 +6,15 @@ module.exports = {
 
   anQuestion: 'CALL getQuestion(?)',
 
+  oneQuestion: 'SELECT questionid, userid, content, score FROM Questions WHERE questionid = ?',
+
   addQuestion: 'INSERT INTO Questions (userid, content) VALUES (?, ?)',
 
   removeQuestion: 'CALL deleteQuestion(?)',
 
   someAnswers: 'CALL getAnswers(?)',
+
+  oneAnswer: 'SELECT answerid, questionid, userid, content, score FROM Answers WHERE answerid = ?',
 
   addAnswer: 'INSERT INTO Answers (questionid, userid, content) VALUES (?, ?, ?)',
 
@@ -28,16 +32,13 @@ module.exports = {
 
   addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)',
 
-  getVotes: 'SELECT JSON_QUERY(votes, "$") AS v FROM Users WHERE userid = ?',
+  getVotes: 'SELECT votes FROM Users WHERE userid = ?',
 
-  setQuestionVotes: 'UPDATE Users SET votes = JSON_SET(votes, "$.questions", JSON_ARRAY(?)) WHERE userid = ?',
+  setVotes: 'UPDATE Users SET votes = ? WHERE userid = ?',
 
-  getQuestionVotes: 'SELECT JSON_QUERY(votes, "$.questions") AS questionVotes FROM Users WHERE userid = ?',
+  modQScore: 'UPDATE Questions SET score = score?1 WHERE questionid = ?',
 
-  setAnswerVotes: 'UPDATE Users SET votes = JSON_SET(votes, "$.answers", JSON_ARRAY(?)) WHERE userid = ?',
-
-  getAnswerVotes: 'SELECT JSON_QUERY(votes, "$.answers") AS answerVotes FROM Users WHERE userid = ?',
-
+  modAScore: 'UPDATE Answers SET score = score?1 WHERE answerid = ?'
 }
 
 /* MariaDB stored procedures, for documentation

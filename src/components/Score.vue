@@ -1,14 +1,14 @@
 <template>
   <v-flex xs2 align-start>
     <v-card dark color="error">
-      <v-card-text class="text-xs-center score"><v-btn @click="upscore" icon><v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon></v-btn>{{ score }}<v-btn @click="downscore" icon><v-icon :class="{disabled: downvoted}">keyboard_arrow_down</v-icon></v-btn></v-card-text>
+      <v-card-text class="text-xs-center score"><v-btn @click="upscore" icon><v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon></v-btn>{{ value }}<v-btn @click="downscore" icon><v-icon :class="{disabled: downvoted}">keyboard_arrow_down</v-icon></v-btn></v-card-text>
     </v-card>
   </v-flex>
 </template>
 
 <style>
 .disabled {
-  color: #137E1D;
+  color: #137E1D!important;
 }
 </style>
 
@@ -20,35 +20,73 @@ export default {
     score: {type: Number, required: true},
     id: {type: Number},
     answer: {default: false},
-    question: {default: false},
-    voted: String
+    question: {default: false}
   },
   data () {
     return {
       upvoted: false,
-      downvoted: false
+      downvoted: false,
+      voted: '',
+      value: this.score,
+      endp: (this.question) ? 'q' : 'a',
+      user: {}
     }
   },
   methods: {
     upscore () {
-      this.upvoted = !this.upvoted
-      this.downvoted = false
-      axios.get("http://192.168.80.14:8000/api/questions/${id}/upscore
+      if (this.$session.exists()) {
+        if (!this.upvoted) {
+          this.upvoted = !this.upvoted
+          this.downvoted = false
+          axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '+'})
+          .then(res => {
+            this.value = res.data.score
+          })
+        } else {
+          this.nullscore('-')
+        }
+      }
     },
     downscore () {
-      this.downvoted = !this.downvoted
-      this.upvoted = false
+      if (this.$session.exists()) {
+        if (!this.downvoted) {
+          this.downvoted = !this.downvoted
+          this.upvoted = false
+          axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '-'})
+          .then(res => {
+            this.value = res.data.score
+          })
+        } else {
+          this.nullscore('+')
+        }
+      }
     },
-    updateScore () {
+    nullscore (vote) {
+      if (this.$session.exists()) {
+        axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: vote, reset: true})
+        .then(res => {
+          this.value = res.data.score
+        })
+        this.upvoted = this.downvoted = false
+        this.voted = ''
+        // if (vote === '+') this.value = this.value + 1
+        // else if (vote === '-') this.value = this.value - 1
+      }
+    }
   },
   created () {
-    if (voted === "+") this.upscore()
-    else if (voted === "-") this.downscore()
-  },
-  computed: {
-    votes () {
-      if (this.upvoted) return this.score + 1
-      else if (this.downvoted) return this.score - 1
-      else return this.votes
+    if (this.$session.exists()) {
+      this.user = this.$session.get('userdata')
+      if (typeof axios.defaults.headers.common['Authorization'] === 'undefined') axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
+      axios.get('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp + '/' + this.id)
+      .then(res => {
+        if (res.data) this.voted = res.data.vote
+      })
+      .then(() => {
+        if (this.voted === '+') this.upvoted = true
+        else if (this.voted === '-') this.downvoted = true
+      })
+    }
+  }
 }
 </script>
