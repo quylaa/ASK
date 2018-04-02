@@ -11,9 +11,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <query v-for="r in results"
-        :key="r.id"
-        :asker="r.asker" :question="r.question" :id="r.id" :score="r.score"></query>
+      <query v-for="r in results" :key="r.id" :query="r"></query>
     </v-layout>
   </v-container>
 </template>
