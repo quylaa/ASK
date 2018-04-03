@@ -43,12 +43,14 @@ export default {
         }
       )
       .then(response => {
-        if (response.status === 200 && response.data.success) {
+        if (response.data.success) {
           this.$session.start()
           this.$session.set('jwt', response.data.token)
           this.$session.set('userdata', response.data.data)
           axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
           this.$router.push('/')
+        } else if (!response.data.success) {
+          alert('Invalid username or password')
         }
       }, err => {
         console.error('err', err)
