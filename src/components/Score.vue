@@ -1,6 +1,6 @@
 <template>
   <v-flex xs2 align-start>
-    <v-card dark color="error">
+    <v-card dark color="thatgreen">
       <v-card-text class="text-xs-center score"><v-btn @click="upscore" icon><v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon></v-btn>{{ value }}<v-btn @click="downscore" icon><v-icon :class="{disabled: downvoted}">keyboard_arrow_down</v-icon></v-btn></v-card-text>
     </v-card>
   </v-flex>
