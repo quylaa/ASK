@@ -6,7 +6,6 @@ import User from '@/components/User'
 import Question from '@/components/Question'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
-import New from '@/components/New'
 
 Vue.use(Router)
 
@@ -42,11 +41,6 @@ export default new Router({
       path: '/logout',
       name: 'Logout',
       component: Logout
-    },
-    {
-      path: '/new',
-      name: 'New',
-      component: New
     }
   ]
 })

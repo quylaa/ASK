@@ -26,9 +26,9 @@ module.exports = {
 
   anUser: 'SELECT userid, name, username, email FROM Users WHERE userid = ?',
   
-  userQuestions: 'SELECT questionid, content, score, timestamp FROM Questions WHERE userid = ?',
+  userQuestions: 'SELECT Users.username AS asker, questionid AS id, content AS question, score, timestamp FROM Questions JOIN Users ON Questions.userid = Users.userid WHERE Questions.userid = ?',
 
-  userAnswers: 'SELECT answerid, questionid, content, score, timestamp FROM Answers WHERE userid = ?',
+  userAnswers: 'SELECT Users.username AS author, answerid AS id, questionid, Answers.content AS answer, Answers.score AS answerScore, timestamp FROM Answers JOIN Users ON Answers.userid = Users.userid WHERE Answers.userid = ?',
 
   addUser: 'INSERT INTO Users (name, username, password, email) VALUES (?, ?, MD5(?), ?)',
 

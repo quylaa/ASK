@@ -20,7 +20,7 @@ module.exports = {
   check (req, res) {
     Users.check(req.body.username, req.body.password)
     .then(data => {
-      if (data[0].userid) {
+      if (data.length > 0) {
         var token = jwt.sign({id: data[0].userid}, conf.secret, {expiresIn: 86400})
         Users.getOne(data[0].userid)
         .then(user => {
