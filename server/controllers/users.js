@@ -35,9 +35,13 @@ module.exports = {
     Users.add(req.body.name, req.body.username, req.body.password, req.body.email)
     .then(data => {
       if (data.affectedRows > 0) {
-        sendResult(res, {"success": true})
+        var token = jwt.sign({id: data.insertId}, conf.secret, {expiresIn: 86400})
+        Users.getOne(data.insertId)
+        .then(user => {
+          sendResult(res, {success: true, token: token, data: user.userdata})
+        })
       } else {
-        sendResult(res, {"success": false})
+        sendResult(res, {success: false})
       }
     })
   },
