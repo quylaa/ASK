@@ -1,6 +1,6 @@
 module.exports = {
 
-  allQuestions: 'SELECT Users.username AS asker, content AS question, questionid AS id, score, timestamp, Questions.color from Questions JOIN Users WHERE Questions.userid = Users.userid',
+  allQuestions: 'SELECT Users.username AS asker, content AS question, questionid AS id, score, timestamp from Questions JOIN Users WHERE Questions.userid = Users.userid',
 
   allAnswers: 'SELECT Users.username AS author, content AS answer, answerid AS id, questionid, score, timestamp FROM Answers JOIN Users WHERE Answers.userid = Users.userid',
 

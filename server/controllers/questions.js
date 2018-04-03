@@ -19,9 +19,9 @@ module.exports = {
     Questions.addOne(req.body.userid, req.body.content)
     .then(data => {
       if (data.affectedRows > 0) {
-        sendResult(res, {"success": true})
+        sendResult(res, {success: true, questionid: data.insertId})
       } else {
-        sendResult(res, {"success": false})
+        sendResult(res, {success: false})
       }
     })
   },

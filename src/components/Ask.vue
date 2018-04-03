@@ -1,10 +1,16 @@
 <template>
-  <v-container grid-list-xl fill-height fluid>
+  <v-container grid-list-md fill-height fluid>
     <v-layout row wrap>
       <query v-for="q in questions" :key="q.id" :query="q"></query>
     </v-layout>
   </v-container>
 </template>
+
+<style>
+@media only screen and (max-width: 599px) .container {
+  padding: 12px;
+}
+</style>
 
 <script>
 import query from '@/components/Query.vue'

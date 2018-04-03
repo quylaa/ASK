@@ -1,7 +1,7 @@
 <template>
 <v-container justify-center d-flex>
   <score :score="answer.answerScore" :id="answer.id" :answer="true"></score>
-  <v-flex xs8 align-end>
+  <v-flex xs9 lg8 align-end>
     <v-card dark color="error">
       <v-container fill-height fluid>
         <v-layout fill-height>
@@ -19,12 +19,7 @@
 </template>
 
 <style>
-.score {
-  width: 105%;
-}
-.score div {
-  padding: 2px;
-}
+
 </style>
 
 <script>

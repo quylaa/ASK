@@ -1,7 +1,15 @@
 <template>
-  <v-flex xs2 align-start>
+  <v-flex xs3 lg2 align-start>
     <v-card dark color="error">
-      <v-card-text class="text-xs-center score"><v-btn @click="upscore" icon><v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon></v-btn>{{ value }}<v-btn @click="downscore" icon><v-icon :class="{disabled: downvoted}">keyboard_arrow_down</v-icon></v-btn></v-card-text>
+      <v-card-text class="text-xs-center score">
+        <v-btn @click="upscore" icon>
+          <v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon>
+        </v-btn>
+        {{ value }}
+        <v-btn @click="downscore" icon>
+          <v-icon :class="{disabled: downvoted}">keyboard_arrow_down</v-icon>
+        </v-btn>
+      </v-card-text>
     </v-card>
   </v-flex>
 </template>
@@ -9,6 +17,10 @@
 <style>
 .disabled {
   color: #137E1D!important;
+}
+.score {
+  padding: 4px;
+  /*width: 105%;*/
 }
 </style>
 
@@ -69,8 +81,6 @@ export default {
         })
         this.upvoted = this.downvoted = false
         this.voted = ''
-        // if (vote === '+') this.value = this.value + 1
-        // else if (vote === '-') this.value = this.value - 1
       }
     }
   },

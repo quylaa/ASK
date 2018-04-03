@@ -43,7 +43,6 @@ export default {
         }
       )
       .then(response => {
-        console.log(response.data)
         if (response.status === 200 && response.data.success) {
           this.$session.start()
           this.$session.set('jwt', response.data.token)

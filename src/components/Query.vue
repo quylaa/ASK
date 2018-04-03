@@ -12,31 +12,16 @@
             <span class="asker-text">{{ query.asker }}</span>
           </v-flex>
           <v-flex xs1 align-end flexbox>
-            <span class="text-xs-center">{{ query.id }}</span>
+            <v-icon>comment</v-icon>
           </v-flex>
         </v-layout>
       </v-container>
     </v-card>
   </router-link></v-flex>
-  <v-flex xs2 fill-height fluid>
-    <v-card dark color="accent" class="text-xs-center comment">
-      <v-btn icon>
-       <v-icon medium>comment</v-icon>
-      </v-btn>
-    </v-card>
-  </v-flex>
 </v-container>
 </template>
 
 <style>
-.score {
-  padding: 2px;
-  width: 105%;
-}
-.comment {
-  padding: 2px;
-  width:105%;
-}
 a {
   text-decoration: none;
 }
