@@ -12,8 +12,9 @@ Vue.use(Vuetify, {
     primary: '#212A3F',
     secondary: '#64708A',
     accent: '#A2EADE',
-    error: '#49B863',
-    info: '#137E1D'
+    error: '#b30000',
+    info: '#137E1D',
+    thatgreen: '#49B863'
   }
 })
 Vue.use(VueSession)

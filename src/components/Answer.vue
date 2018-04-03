@@ -2,7 +2,7 @@
 <v-container justify-center d-flex>
   <score :score="answer.answerScore" :id="answer.id" :answer="true"></score>
   <v-flex xs9 lg8 align-end>
-    <v-card dark color="error">
+    <v-card dark color="info">
       <v-container fill-height fluid>
         <v-layout fill-height>
           <v-flex xs10 align-start flexbox>

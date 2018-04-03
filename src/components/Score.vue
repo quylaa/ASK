@@ -1,6 +1,6 @@
 <template>
   <v-flex xs3 lg2 align-start>
-    <v-card dark color="error">
+    <v-card dark color="thatgreen">
       <v-card-text class="text-xs-center score">
         <v-btn @click="upscore" icon>
           <v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon>
