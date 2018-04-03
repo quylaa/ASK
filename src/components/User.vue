@@ -20,7 +20,7 @@
       :id="'tab-' + i.id"
     >
       <v-card flat v-if="i.id === 1">
-          <v-card-text class="centered">
+          <v-card-text>
             <v-list subheader>
               <v-list-title avatar>
                 <v-list-title-avatar>
@@ -36,10 +36,14 @@
           </v-card-text>
       </v-card>
       <v-card flat v-else-if="i.id === 2">
-        <v-card-text>{{ i.questions }}</v-card-text>
+        <v-card-text>
+          <query v-for="q in i.questions" :key="q.questionid" :query="q"></query>
+        </v-card-text>
       </v-card>
       <v-card flat v-else="i.id === 3">
-        <v-card-text>{{ i.answers }}</v-card-text>
+        <v-card-text>
+          <answer v-for="a in i.answers" :key="a.answerid" :answer="a"></answer>
+        </v-card-text>
       </v-card>
     </v-tab-item>
   </v-tabs>
@@ -58,8 +62,15 @@
 }
 </style>
 <script>
+import axios from 'axios'
+import query from '@/components/Query.vue'
+import answer from '@/components/Answer.vue'
 export default {
   name: 'user',
+  components: {
+    query: query,
+    answer: answer
+  },
   data () {
     return {
       items: [
@@ -88,8 +99,19 @@ export default {
     this.items[0].name = userdata.name
     this.items[0].username = userdata.username
     this.items[0].email = userdata.email
-    this.items[1].questions = userdata.questions
-    this.items[2].answers = userdata.answers
+    // this.items[1].questions = userdata.questions
+    // this.items[2].answers = userdata.answers
+    if (this.$session.exists()) {
+      this.user = this.$session.get('userdata')
+      if (typeof axios.defaults.headers.common['Authorization'] === 'undefined') axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
+      axios.get('http://192.168.80.14:8000/api/users/' + this.user.userid)
+      .then(res => {
+        if (res.data) {
+          this.items[1].questions = res.data.questions
+          this.items[2].answers = res.data.answers
+        }
+      })
+    }
   }
 }
 </script>
