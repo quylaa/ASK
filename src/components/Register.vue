@@ -1,5 +1,5 @@
 <template>
-  <v-container grid list text-xs-center>
+  <v-container grid list text-xs-center class="register">
     <v-layout row child-flex justify-center align-center wrap>
       <v-flex xs4>
         <v-form v-model="valid" @submit="register">
@@ -15,6 +15,9 @@
 </template>
 
 <style>
+.register {
+  background: inherit!important;
+}
 </style>
 
 <script>
@@ -31,15 +34,17 @@ export default {
       username: '',
       usernameRules: [
         v => !!v || 'Username is required',
-        v => (v && v.length >= 3) || 'Username must be greater than 3 characters'
+        v => (v && v.length > 3) || 'Username must be greater than 3 characters'
       ],
       password: '',
       passwordRules: [
-        v => !!v || 'Password is required'
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
       ],
       email: '',
       emailRules: [
-        v => !!v || 'Email is required'
+        v => !!v || 'Email is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ]
     }
   },
@@ -58,7 +63,7 @@ export default {
           this.$session.start()
           this.$session.set('jwt', response.data.token)
           this.$session.set('userdata', response.data.data)
-          axios.defaults.headers.common['Authoirzation'] = 'Bearer ' + response.data.token
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
           this.$router.push('/')
         } else if (!response.data.success) {
           alert('Please register')
