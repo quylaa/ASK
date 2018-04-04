@@ -2,10 +2,10 @@
   <v-container grid-list text-xs-center>
     <v-layout row child-flex justify-center align-center wrap>
       <v-flex xs4>
-        <v-form v-model="valid" @submit="login">
+        <v-form v-model="valid" @keyup.native.enter="valid && login($event)">
           <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
           <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
-          <v-btn type="submit" :disabled="!valid">submit</v-btn>
+          <v-btn type="button" @click="login" :disabled="!valid">submit</v-btn>
         </v-form>
         No account?<v-spacer></v-spacer>
        <v-btn to="/register">register</v-btn>
