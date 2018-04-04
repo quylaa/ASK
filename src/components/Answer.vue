@@ -8,7 +8,7 @@
           <v-flex xs10 align-start flexbox>
             <span class="answer-text">{{ answer.answer }}</span>
           </v-flex>
-          <v-flex xs1 slign-end flexbox>
+          <v-flex xs1 align-end flexbox>
             <span class="author-text">{{ answer.author }}</span>
           </v-flex>
         </v-layout>
