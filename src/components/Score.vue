@@ -19,8 +19,7 @@
   color: #8790A5!important;
 }
 .score {
-  padding: 2px;
-  /*width: 105%;*/
+  padding: 2px!important;
 }
 </style>
 
@@ -50,7 +49,7 @@ export default {
         if (!this.upvoted) {
           this.upvoted = !this.upvoted
           this.downvoted = false
-          axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '+'})
+          axios.put('/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '+'})
           .then(res => {
             this.value = res.data.score
           })
@@ -64,7 +63,7 @@ export default {
         if (!this.downvoted) {
           this.downvoted = !this.downvoted
           this.upvoted = false
-          axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '-'})
+          axios.put('/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: '-'})
           .then(res => {
             this.value = res.data.score
           })
@@ -75,7 +74,7 @@ export default {
     },
     nullscore (vote) {
       if (this.$session.exists()) {
-        axios.put('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: vote, reset: true})
+        axios.put('/api/users/' + this.user.userid + '/votes/' + this.endp, {id: this.id, vote: vote, reset: true})
         .then(res => {
           this.value = res.data.score
         })
@@ -88,7 +87,7 @@ export default {
     if (this.$session.exists()) {
       this.user = this.$session.get('userdata')
       if (typeof axios.defaults.headers.common['Authorization'] === 'undefined') axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
-      axios.get('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/' + this.endp + '/' + this.id)
+      axios.get('/api/users/' + this.user.userid + '/votes/' + this.endp + '/' + this.id)
       .then(res => {
         if (res.data) this.voted = res.data.vote
       })

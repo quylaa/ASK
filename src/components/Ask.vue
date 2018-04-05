@@ -35,7 +35,7 @@ export default {
   methods: {
     newask () {
       if (this.$session.exists() && this.$refs.newask.validate()) {
-        axios.post('http://192.168.80.14:8000/api/questions/add',
+        axios.post('/api/questions/add',
           {
             content: this.content,
             userid: this.user.userid
@@ -65,12 +65,12 @@ export default {
     }
   },
   created () {
-    axios.get('http://192.168.80.14:8000/api/questions')
+    axios.get('/api/questions')
     .then(res => {
       this.questions = res.data
       if (this.$session.exists()) {
         this.user = this.$session.get('userdata')
-        axios.get('http://192.168.80.14:8000/api/users/' + this.user.userid + '/votes/q')
+        axios.get('/api/users/' + this.user.userid + '/votes/q')
         .then(results => {
           this.votes = results.data
         })

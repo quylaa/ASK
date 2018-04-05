@@ -53,12 +53,12 @@
 <style>
 .font {
     font-size: 22px;
-    text-align: center;
+    text-align: center!important;
 }
 .helpme {
-    display: flex;
-    justify-content: center;
-    font-size: 130px;
+    display: flex!important;
+    justify-content: center!important;
+    font-size: 130px!important;
 }
 .user-info, .user-list {
   background: inherit!important;
@@ -102,12 +102,10 @@ export default {
     this.items[0].name = userdata.name
     this.items[0].username = userdata.username
     this.items[0].email = userdata.email
-    // this.items[1].questions = userdata.questions
-    // this.items[2].answers = userdata.answers
     if (this.$session.exists()) {
       this.user = this.$session.get('userdata')
       if (typeof axios.defaults.headers.common['Authorization'] === 'undefined') axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
-      axios.get('http://192.168.80.14:8000/api/users/' + this.user.userid)
+      axios.get('/api/users/' + this.user.userid)
       .then(res => {
         if (res.data) {
           this.items[1].questions = res.data.questions

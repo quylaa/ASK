@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     register () {
-      axios.post('http://192.168.80.14:8000/api/users/add',
+      axios.post('/api/users/add',
         {
           name: this.name,
           username: this.username,

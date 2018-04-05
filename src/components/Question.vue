@@ -53,7 +53,7 @@ export default {
   methods: {
     newanswer () {
       if (this.$session.exists()) {
-        axios.post('http://192.168.80.14:8000/api/answers/add',
+        axios.post('/api/answers/add',
           {
             questionid: this.$route.params.id,
             content: this.content,
@@ -63,7 +63,7 @@ export default {
         .then(response => {
           if (response.data.success) {
             this.shown = false
-            axios.get('http://192.168.80.14:8000/api/answers/' + this.$route.params.id)
+            axios.get('/api/answers/' + this.$route.params.id)
             .then(res => {
               this.qna = res.data
             })
@@ -82,7 +82,7 @@ export default {
     }
   },
   created () {
-    const endpoint = 'http://192.168.80.14:8000/api/answers/' + this.$route.params.id
+    const endpoint = '/api/answers/' + this.$route.params.id
     axios.get(endpoint)
     .then(res => {
       this.qna = res.data
