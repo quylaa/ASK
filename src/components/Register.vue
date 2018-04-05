@@ -2,12 +2,12 @@
   <v-container grid list text-xs-center class="register">
     <v-layout row child-flex justify-center align-center wrap>
       <v-flex xs4>
-        <v-form v-model="valid" @submit="register">
+        <v-form v-model="valid" @keyup.native.enter="valid && register($event)">
           <v-text-field label="Name" v-model="name" :rules="nameRules" required></v-text-field>
           <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
           <v-text-field label="Email" v-model="email" :rules="emailRules" required></v-text-field>
           <v-text-field type="password" label="Password" v-model="password" :rules="passwordRules" required></v-text-field>
-          <v-btn type="submit" :disbaled="!valid">submit</v-btn>
+          <v-btn type="button" @click="register" :disabled="!valid">submit</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -66,7 +66,7 @@ export default {
           axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
           this.$router.push('/')
         } else if (!response.data.success) {
-          alert('Please register')
+          alert(response.data.message)
         }
       }, err => {
         console.error('err', err)

@@ -32,16 +32,23 @@ module.exports = {
     })
   },
   add (req, res) {
-    Users.add(req.body.name, req.body.username, req.body.password, req.body.email)
+    Users.unique(req.body.username, req.body.email)
     .then(data => {
-      if (data.affectedRows > 0) {
-        var token = jwt.sign({id: data.insertId}, conf.secret, {expiresIn: 86400})
-        Users.getOne(data.insertId)
-        .then(user => {
-          sendResult(res, {success: true, token: token, data: user.userdata})
-        })
+      if (data.length > 0) {
+        sendResult(res, {success: false, message: 'Error: user or email already used'})
       } else {
-        sendResult(res, {success: false})
+        Users.add(req.body.name, req.body.username, req.body.password, req.body.email)
+        .then(data => {
+          if (data.affectedRows > 0) {
+            var token = jwt.sign({id: data.insertId}, conf.secret, {expiresIn: 86400})
+            Users.getOne(data.insertId)
+            .then(user => {
+              sendResult(res, {success: true, token: token, data: user.userdata})
+            })
+          } else {
+            sendResult(res, {success: false, message: 'Error: database error'})
+          }
+        })
       }
     })
   },

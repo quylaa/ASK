@@ -22,7 +22,9 @@ module.exports = {
 
   allUsers: 'SELECT * FROM Users',
 
-  checkLogin: 'SELECT userid FROM Users WHERE username = ? and password = MD5(?)',
+  checkLogin: 'SELECT userid FROM Users WHERE username = ? AND password = MD5(?)',
+
+  checkUnique: 'SELECT userid FROM Users WHERE username = ? OR email = ?',
 
   anUser: 'SELECT userid, name, username, email FROM Users WHERE userid = ?',
   

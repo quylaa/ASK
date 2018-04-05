@@ -23,6 +23,9 @@ module.exports = {
   check: (user, passwd) => {
     return db.query(statements.checkLogin, [user, passwd])
   },
+  unique: (user, email) => {
+    return db.query(statements.checkUnique, [user, email])
+  },
   add: (name, username, password, email) => {
     return db.query(statements.addUser, [name, username, password, email])
   },
