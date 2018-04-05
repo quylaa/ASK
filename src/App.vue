@@ -30,9 +30,6 @@
 </template>
 
 <script>
-// import score from '@/components/Score.vue'
-// import query from '@/components/Query.vue'
-// import axios from 'axios'
 export default {
   name: 'Ask'
 }

@@ -19,9 +19,9 @@
       :key="i"
       :id="'tab-' + i.id"
     >
-      <v-card flat v-if="i.id === 1">
+      <v-card flat v-if="i.id === 1" class="user-info">
           <v-card-text>
-            <v-list subheader>
+            <v-list subheader class="user-list">
               <v-list-title avatar>
                 <v-list-title-avatar>
                   <v-icon color="info" class="helpme">person</v-icon>
@@ -35,16 +35,16 @@
             </v-list>
           </v-card-text>
       </v-card>
-      <v-card flat v-else-if="i.id === 2">
-        <v-card-text>
+      <v-container grid-list-md fill-height fluid v-else-if="i.id === 2">
+        <v-layout row wrap>
           <query v-for="q in i.questions" :key="q.questionid" :query="q"></query>
-        </v-card-text>
-      </v-card>
-      <v-card flat v-else="i.id === 3">
-        <v-card-text>
+        </v-layout>
+      </v-container>
+      <v-container grid-list-md fill-height fluid v-else-if="i.id === 3">
+        <v-layout row wrap>
           <answer v-for="a in i.answers" :key="a.answerid" :answer="a"></answer>
-        </v-card-text>
-      </v-card>
+        </v-layout>
+      </v-container>
     </v-tab-item>
   </v-tabs>
 </v-container>
@@ -59,6 +59,9 @@
     display: flex;
     justify-content: center;
     font-size: 130px;
+}
+.user-info, .user-list {
+  background: inherit!important;
 }
 </style>
 <script>

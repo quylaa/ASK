@@ -1,6 +1,6 @@
 <template>
   <v-flex xs3 lg2 align-start>
-    <v-card dark color="thatgreen">
+    <v-card dark color="score">
       <v-card-text class="text-xs-center score">
         <v-btn @click="upscore" icon>
           <v-icon :class="{disabled: upvoted}">keyboard_arrow_up</v-icon>
@@ -16,10 +16,10 @@
 
 <style>
 .disabled {
-  color: #137E1D!important;
+  color: #8790A5!important;
 }
 .score {
-  padding: 4px;
+  padding: 2px;
   /*width: 105%;*/
 }
 </style>

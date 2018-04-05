@@ -13,8 +13,9 @@ Vue.use(Vuetify, {
     secondary: '#64708A',
     accent: '#A2EADE',
     error: '#b30000',
-    info: '#137E1D',
-    thatgreen: '#49B863'
+    info: '#BAC3D8',
+    score: '#3B4459',
+    answer: '#8790A5'
   }
 })
 Vue.use(VueSession)
